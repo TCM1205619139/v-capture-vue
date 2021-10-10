@@ -1,0 +1,47 @@
+{
+  "name": "tc-capture",
+  "version": "1.0.0",
+  "description": "a vue multi-page application for chrome extension",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --config config/webpack.dev.js",
+    "build": "webpack --config config/webpack.prod.js"
+  },
+  "keywords": [
+    "chrome",
+    "extension"
+  ],
+  "author": "SweetTang",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.22.0",
+    "less": "^4.1.2",
+    "vue": "^3.2.20",
+    "vue-router": "^3.5.2",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.15.6",
+    "@babel/plugin-transform-runtime": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-typescript": "^7.15.0",
+    "@vue/compiler-sfc": "^3.2.20",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^9.0.1",
+    "core-js": "^3.18.2",
+    "css-loader": "^6.4.0",
+    "file-loader": "^6.2.0",
+    "html-loader": "^2.1.2",
+    "html-webpack-plugin": "^5.3.2",
+    "less-loader": "^10.0.1",
+    "style-loader": "^3.3.0",
+    "url-loader": "^4.1.1",
+    "vue-loader": "^16.8.1",
+    "webpack": "^5.58.1",
+    "webpack-cli": "^4.9.0",
+    "webpack-merge": "^5.8.0"
+  }
+}
