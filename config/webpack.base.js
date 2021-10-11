@@ -41,7 +41,7 @@ module.exports = {
     alias: {
       '@': join('src')
     },
-    extensions: ['.js', '.vue', '.ts'],
+    extensions: ['.vue', '.ts', '.js'],
   },
   module: {
     rules: [
@@ -58,11 +58,22 @@ module.exports = {
         }
       },
       {
-        test: /\.m?(js|ts)$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader'
         }
+      },
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        use: [
+          'babel-loader',
+          'ts-loader'
+        ]
+        // use: {
+        //   loader: 'babel-loader'
+        // }
       },
       {
         test: /\.(le|c)ss$/,

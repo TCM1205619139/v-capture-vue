@@ -3,10 +3,10 @@
  * @param  {Function[]} fns
  * @returns {Function => Promise}
  */
-const composeAsync = (...fns) => {
-  return (input) => {
+const composeAsync = (...fns: Function[]) => {
+  return (input: any) => {
     return fns.reduce(
-      (sequins, fn) => {
+      (sequins, fn:Function) => {
         return sequins.then(async data => {
           return Promise.resolve(await fn(data))
         })

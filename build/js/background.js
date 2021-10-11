@@ -8,15 +8,16 @@
  */
 var background;
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/background/index.js":
+/***/ "./src/background/index.ts":
 /*!*********************************!*\
-  !*** ./src/background/index.js ***!
+  !*** ./src/background/index.ts ***!
   \*********************************/
 /***/ (() => {
 
-eval("console.log('SweetTang');//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvYmFja2dyb3VuZC9pbmRleC5qcy5qcyIsIm1hcHBpbmdzIjoiQUFBQSIsInNvdXJjZXMiOlsid2VicGFjazovL1tuYW1lXS8uL3NyYy9iYWNrZ3JvdW5kL2luZGV4LmpzPzIzZmIiXSwic291cmNlc0NvbnRlbnQiOlsiY29uc29sZS5sb2coJ1N3ZWV0VGFuZycpOyJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/background/index.js\n");
+
 
 /***/ })
 
@@ -27,7 +28,7 @@ eval("console.log('SweetTang');//# sourceURL=[module]\n//# sourceMappingURL=data
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval-source-map devtool is used.
 /******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./src/background/index.js"]();
+/******/ 	__webpack_modules__["./src/background/index.ts"]();
 /******/ 	background = __webpack_exports__;
 /******/ 	
 /******/ })()
