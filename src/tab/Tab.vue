@@ -1,15 +1,12 @@
 <template>
-  <div class="container"></div>
+  <div class="tab-container"></div>
 </template>
 
-<script lang="ts">
+<script>
   import { defineComponent } from 'vue'
 
   export default defineComponent({
-    name: 'App',
-    setup () {
-      return {}
-    }
+    name: "Tab"
   })
 </script>
 
@@ -18,10 +15,5 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-
-    .container {
-      width: 300px;
-      min-height: 100px;
-    }
   }
 </style>
