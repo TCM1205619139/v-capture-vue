@@ -110,13 +110,13 @@ module.exports = {
     ]
   },
   plugins: [
-    new VueLoaderPlugin(),
     createHtmlTemplate('background', 'background'),
     createHtmlTemplate('content', 'content'),
     createHtmlTemplate('devtool', 'devtool'),
     createHtmlTemplate('option', 'option'),
     createHtmlTemplate('popup', 'popup'),
     createHtmlTemplate('tab', 'tab'),
+    new VueLoaderPlugin(),
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
       patterns: [
