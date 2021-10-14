@@ -1,7 +1,5 @@
-import { createApp } from 'vue'
-import App from './Content.vue'
-import store from '../store'
+/**
+ * 因为content.js，没有视图， 所以不需要使用Vue
+ */
 
-const app = createApp(App).use(store)
-
-app.mount('#app')
+// do something
