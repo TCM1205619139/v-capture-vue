@@ -1,5 +1,8 @@
 import { ExtensionPageType, Notify } from './notify'
 
+/**
+ * chrome插件各模块的短链接消息通知
+ */
 class Message implements Notify{
   readonly from: ExtensionPageType
   readonly to: ExtensionPageType
