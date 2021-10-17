@@ -67,13 +67,14 @@ module.exports = {
       {
         test: /\.ts$/,
         exclude: /node_modules/,
-        use: [
-          'babel-loader',
-          'ts-loader'
-        ]
-        // use: {
-        //   loader: 'babel-loader'
-        // }
+        loader: 'ts-loader',
+        options: {
+          appendTsSuffixTo: [/\.vue$/]
+        }
+        // use: [
+        //   'babel-loader',
+        //   'ts-loader'
+        // ]
       },
       {
         test: /\.(le|c)ss$/,

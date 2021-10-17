@@ -1,8 +1,9 @@
 import { DefineComponent } from 'vue'
+import LoadingComponent from '@/components/LoadingForAsync.vue'
+import ErrorComponent from '@/components/ErrorForAsync.vue'
 
 type VueComponent = DefineComponent<{}, {}, any>
 
-// eg: createAsyncComponent(import(/* webpackChunkName: 'component' */ './component.vue'))
 /**
  * 创建异步组件函数
  * @param component
@@ -11,20 +12,21 @@ type VueComponent = DefineComponent<{}, {}, any>
  * @param delay
  * @param timeout
  */
+// eg: createAsyncComponent(import(/* webpackChunkName: 'component' */ './component.vue'))
 const createAsyncComponent = (
-  importComponentFn: Promise<VueComponent>,
-  loading: VueComponent,
-  error: VueComponent,
+  importComponentFn: Promise<typeof import("*.vue")>,
+  loadingComponent: VueComponent = LoadingComponent,
+  errorComponent: VueComponent = ErrorComponent,
   delay: number = 200,
   timeout: number = 5000
 ) => {
-  return {
+  return () => ({
     component: importComponentFn,
-    loading: loading,
-    error: error,
+    loading: loadingComponent,
+    error: errorComponent,
     delay: delay,
     timeout: timeout
-  }
+  })
 }
 
 export {
