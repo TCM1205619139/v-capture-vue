@@ -4,7 +4,8 @@ enum ExtensionPageType {
   Background = 'background-page',
   Option = 'option-page',
   Tab = 'tab-page',
-  Devtool = 'devtool-page'
+  Devtool = 'devtool-page',
+  Inject = 'inject-page'
 }
 
 interface Notify {
