@@ -4,11 +4,13 @@ const MessageDict = [
   {
     local: ExtensionPageType.Content,
     origin: ExtensionPageType.Popup,
+    // @ts-ignore
     send: chrome.runtime.sendMessage,
   },
   {
     local: ExtensionPageType.Content,
     origin: ExtensionPageType.Background,
+    // @ts-ignore
     send: chrome.runtime?.sendMessage
   },
   {
@@ -19,11 +21,13 @@ const MessageDict = [
   {
     local: ExtensionPageType.Inject,
     origin: ExtensionPageType.Popup,
+    // @ts-ignore
     send: chrome.runtime?.sendMessage
   },
   {
     local: ExtensionPageType.Inject,
     origin: ExtensionPageType.Background,
+    // @ts-ignore
     send: chrome.runtime?.sendMessage
   },
   {
@@ -34,21 +38,25 @@ const MessageDict = [
   {
     local: ExtensionPageType.Popup,
     origin: ExtensionPageType.Content,
+    // @ts-ignore
     send: chrome.tabs?.sendMessage
   },
   {
     local: ExtensionPageType.Popup,
     origin: ExtensionPageType.Inject,
+    // @ts-ignore
     send: chrome.tabs?.sendMessage
   },
   {
     local: ExtensionPageType.Background,
     origin: ExtensionPageType.Content,
+    // @ts-ignore
     send: chrome.tabs?.sendMessage
   },
   {
     local: ExtensionPageType.Background,
     origin: ExtensionPageType.Inject,
+    // @ts-ignore
     send: chrome.tabs?.sendMessage
   }
 ]
