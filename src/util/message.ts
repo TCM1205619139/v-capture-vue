@@ -12,29 +12,6 @@ const FromContentDict = [
     origin: ExtensionPageType.Background,
     // @ts-ignore
     send: chrome.runtime?.sendMessage
-  }, {
-    local: ExtensionPageType.Content,
-    origin: ExtensionPageType.Inject,
-    send: window.postMessage
-  }
-]
-const FromInjectDict = [
-  {
-    local: ExtensionPageType.Inject,
-    origin: ExtensionPageType.Popup,
-    // @ts-ignore
-    send: chrome.runtime?.sendMessage
-  },
-  {
-    local: ExtensionPageType.Inject,
-    origin: ExtensionPageType.Background,
-    // @ts-ignore
-    send: chrome.runtime?.sendMessage
-  },
-  {
-    local: ExtensionPageType.Inject,
-    origin: ExtensionPageType.Content,
-    send: window.postMessage
   }
 ]
 const FromPopupDict = [
@@ -48,11 +25,6 @@ const FromPopupDict = [
     origin: ExtensionPageType.Content,
     // @ts-ignore
     send: chrome.tabs?.sendMessage
-  }, {
-    local: ExtensionPageType.Popup,
-    origin: ExtensionPageType.Inject,
-    // @ts-ignore
-    send: chrome.tabs?.sendMessage
   }
 ]
 const FromBackgroundDict = [
@@ -61,18 +33,11 @@ const FromBackgroundDict = [
     origin: ExtensionPageType.Content,
     // @ts-ignore
     send: chrome.tabs?.sendMessage
-  },
-  {
-    local: ExtensionPageType.Background,
-    origin: ExtensionPageType.Inject,
-    // @ts-ignore
-    send: chrome.tabs?.sendMessage
   }
 ]
 
 const MessageDict = [
   ...FromContentDict,
-  ...FromInjectDict,
   ...FromPopupDict,
   ...FromBackgroundDict
 ]
