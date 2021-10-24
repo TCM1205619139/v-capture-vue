@@ -4,12 +4,12 @@ import { ComponentInternalInstance } from 'vue'
 const FromContentDict = [
   {
     local: ExtensionPageType.Content,
-    origin: ExtensionPageType.Popup,
+    remote: ExtensionPageType.Popup,
     // @ts-ignore
     send: chrome.runtime.sendMessage,
   }, {
     local: ExtensionPageType.Content,
-    origin: ExtensionPageType.Background,
+    remote: ExtensionPageType.Background,
     // @ts-ignore
     send: chrome.runtime?.sendMessage
   }
@@ -17,12 +17,12 @@ const FromContentDict = [
 const FromPopupDict = [
   {
     local: ExtensionPageType.Popup,
-    origin: ExtensionPageType.Background,
+    remote: ExtensionPageType.Background,
     // @ts-ignore
     send: () => {}
   }, {
     local: ExtensionPageType.Popup,
-    origin: ExtensionPageType.Content,
+    remote: ExtensionPageType.Content,
     // @ts-ignore
     send: chrome.tabs?.sendMessage
   }
@@ -30,19 +30,19 @@ const FromPopupDict = [
 const FromBackgroundDict = [
   {
     local: ExtensionPageType.Background,
-    origin: ExtensionPageType.Content,
+    remote: ExtensionPageType.Content,
     // @ts-ignore
     send: chrome.tabs?.sendMessage
   }
 ]
 const FromDevtoolDict = [
   {
-    from: ExtensionPageType.Devtool,
+    local: ExtensionPageType.Devtool,
     remote: ExtensionPageType.Popup,
     // @ts-ignore
     send: chrome.runtime.sendMessage
   }, {
-    from: ExtensionPageType.Devtool,
+    local: ExtensionPageType.Devtool,
     remote: ExtensionPageType.Background,
     // @ts-ignore
     send: chrome.runtime.sendMessage
@@ -74,7 +74,7 @@ class Message implements Notify{
 
   private findSendFn (key: string) {
     const dict = MessageDict.find(item => {
-      return item.local === this.from && item.origin === this.to
+      return item.local === this.from && item.remote === this.to
     })
     return dict?.send
   }
