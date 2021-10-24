@@ -1,5 +1,5 @@
 import { ExtensionPageType, Notify } from './notify'
-
+import { ComponentInternalInstance } from 'vue'
 const MessageDict = [
   {
     local: ExtensionPageType.Content,
@@ -37,6 +37,12 @@ const MessageDict = [
   },
   {
     local: ExtensionPageType.Popup,
+    origin: ExtensionPageType.Background,
+    // @ts-ignore
+    send: () => {}
+  },
+  {
+    local: ExtensionPageType.Popup,
     origin: ExtensionPageType.Content,
     // @ts-ignore
     send: chrome.tabs?.sendMessage
@@ -67,18 +73,57 @@ const MessageDict = [
 class Message implements Notify{
   readonly from: ExtensionPageType
   readonly to: ExtensionPageType
-  public send: Function
+  private readonly sendFn: Function
+  public context: ComponentInternalInstance | null
 
-  constructor(from: ExtensionPageType, to: ExtensionPageType) {
+  constructor(from: ExtensionPageType, to: ExtensionPageType, context: ComponentInternalInstance | null) {
     this.from = from
     this.to = to
-    this.send = this.findSendFn()
+    this.context = context
+    this.sendFn = this.findSendFn('send')
   }
 
-  private findSendFn () {
-    return function () {
-      // 根据字典找到对应通信方法
-    }
+  private findSendFn (key: string) {
+    const dict = MessageDict.find(item => {
+      return item.local === this.from && item.origin === this.to
+    })
+    return dict?.send
+  }
+
+  public send (payload: any, callback?: Function) {
+    const options = {active: true, currentWindow: true}
+
+    // @ts-ignore
+    chrome.tabs.query(options, tabs => {
+      // @ts-ignore
+      if (this.sendFn === chrome.tabs.sendMessage) {
+        // this.sendFn === chrome.tabs.sendMessage
+        this.sendFn(tabs[0]?.id, payload, callback)   // 这里似乎可以用函数重载进行简化
+        // @ts-ignore
+      } else if (this.sendFn === chrome.tabs?.sendMessage) {
+        // this.sendFn === chrome.runtime.sendMessage
+        this.sendFn(payload, callback)
+      } else {
+        // this.sendFn === window.postMessage
+        this.sendFn(payload, this.from)
+      }
+    })
+  }
+
+  public on(callback?: Function) {
+    // @ts-ignore
+    chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+      let response
+
+      if (callback !== undefined) {
+        response = await callback(request, sender)  // 等待接收方处理完毕后再返回
+      }
+
+      sendResponse({
+        response,
+        state: true
+      })
+    })
   }
 }
 
