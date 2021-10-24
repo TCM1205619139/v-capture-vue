@@ -3,12 +3,22 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from 'vue'
+  import Message from "../util/message";
+  import {defineComponent, ref, getCurrentInstance} from 'vue'
+  import {ExtensionPageType} from "../util/notify";
+  import {ComponentInternalInstance} from "@vue/runtime-core";
+
+  const createMessage = (vueInstance: ComponentInternalInstance | null): void => {
+    const message = new Message(ExtensionPageType.Popup, ExtensionPageType.Content, vueInstance)
+
+    message.send({time: new Date()})
+  }
 
   export default defineComponent({
     name: 'App',
     setup () {
       const title = ref('你好')
+      createMessage(getCurrentInstance())
 
       return {
         title
