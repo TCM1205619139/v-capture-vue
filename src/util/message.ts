@@ -35,11 +35,25 @@ const FromBackgroundDict = [
     send: chrome.tabs?.sendMessage
   }
 ]
+const FromDevtoolDict = [
+  {
+    from: ExtensionPageType.Devtool,
+    remote: ExtensionPageType.Popup,
+    // @ts-ignore
+    send: chrome.runtime.sendMessage
+  }, {
+    from: ExtensionPageType.Devtool,
+    remote: ExtensionPageType.Background,
+    // @ts-ignore
+    send: chrome.runtime.sendMessage
+  }
+]
 
 const MessageDict = [
   ...FromContentDict,
   ...FromPopupDict,
-  ...FromBackgroundDict
+  ...FromBackgroundDict,
+  ...FromDevtoolDict
 ]
 
 /**
