@@ -69,10 +69,10 @@ class Message implements Notify{
     this.from = from
     this.to = to
     this.context = context
-    this.sendFn = this.findSendFn('send')
+    this.sendFn = this.findSendFn()
   }
 
-  private findSendFn (key: string) {
+  private findSendFn () {
     const dict = MessageDict.find(item => {
       return item.local === this.from && item.remote === this.to
     })
