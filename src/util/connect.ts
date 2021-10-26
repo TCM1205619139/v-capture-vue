@@ -1,4 +1,4 @@
-import { ExtensionPageType, Notify } from './notify'
+import { Notify } from './notify'
 
 /**
  * chrome插件各模块的长链接消息通知

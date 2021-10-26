@@ -5,7 +5,6 @@
 <script lang="ts">
   import Message from "../util/message";
   import {defineComponent, ref, getCurrentInstance} from 'vue'
-  import {ExtensionPageType} from "../util/notify";
   import {ComponentInternalInstance} from "@vue/runtime-core";
 
   const createMessage = (vueInstance: ComponentInternalInstance | null): void => {

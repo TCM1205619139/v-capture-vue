@@ -1,50 +1,48 @@
-import { ExtensionPageType, Notify } from './notify'
+import { Notify } from './notify'
 import { ComponentInternalInstance } from 'vue'
 
-const FromContentDict = [
+interface PageDict {
+  local: ExtensionPageType,
+  remote: ExtensionPageType,
+  send: Function
+}
+const FromContentDict: PageDict[] = [
   {
     local: ExtensionPageType.Content,
     remote: ExtensionPageType.Popup,
-    // @ts-ignore
     send: chrome.runtime.sendMessage,
   }, {
     local: ExtensionPageType.Content,
     remote: ExtensionPageType.Background,
-    // @ts-ignore
-    send: chrome.runtime?.sendMessage
+    send: chrome.runtime.sendMessage
   }
 ]
-const FromPopupDict = [
+const FromPopupDict: PageDict[] = [
   {
     local: ExtensionPageType.Popup,
     remote: ExtensionPageType.Background,
-    // @ts-ignore
     send: () => {}
   }, {
     local: ExtensionPageType.Popup,
     remote: ExtensionPageType.Content,
-    // @ts-ignore
-    send: chrome.tabs?.sendMessage
+    send: chrome.tabs.sendMessage
   }
 ]
-const FromBackgroundDict = [
+const FromBackgroundDict: PageDict[] = [
   {
     local: ExtensionPageType.Background,
     remote: ExtensionPageType.Content,
-    // @ts-ignore
-    send: chrome.tabs?.sendMessage
+    send: chrome.tabs.sendMessage
   }
 ]
-const FromDevtoolDict = [
+const FromDevtoolDict: PageDict[] = [
   {
     local: ExtensionPageType.Devtool,
     remote: ExtensionPageType.Popup,
-    // @ts-ignore
     send: chrome.runtime.sendMessage
   }, {
     local: ExtensionPageType.Devtool,
     remote: ExtensionPageType.Background,
-    // @ts-ignore
     send: chrome.runtime.sendMessage
   }
 ]
@@ -73,23 +71,20 @@ class Message implements Notify{
   }
 
   private findSendFn () {
-    const dict = MessageDict.find(item => {
+    const dict = MessageDict.find((item: PageDict) => {
       return item.local === this.from && item.remote === this.to
     })
-    return dict?.send
+    return dict?.send || new Function()
   }
 
   public send (payload: any, callback?: Function) {
     const options = {active: true, currentWindow: true}
 
-    // @ts-ignore
-    chrome.tabs.query(options, tabs => {
-      // @ts-ignore
+    chrome.tabs.query(options, (tabs: any) => {
       if (this.sendFn === chrome.tabs.sendMessage) {
         // this.sendFn === chrome.tabs.sendMessage
-        this.sendFn(tabs[0]?.id, payload, callback)   // 这里似乎可以用函数重载进行简化
-        // @ts-ignore
-      } else if (this.sendFn === chrome.tabs?.sendMessage) {
+        this.sendFn(tabs[0].id, payload, callback)   // 这里似乎可以用函数重载进行简化
+      } else if (this.sendFn === chrome.tabs.sendMessage) {
         // this.sendFn === chrome.runtime.sendMessage
         this.sendFn(payload, callback)
       } else {
@@ -100,8 +95,7 @@ class Message implements Notify{
   }
 
   public on(callback?: Function) {
-    // @ts-ignore
-    chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+    chrome.runtime.onMessage.addListener(async (request: any, sender: any, sendResponse: Function) => {
       let response
 
       if (callback !== undefined) {

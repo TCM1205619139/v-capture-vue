@@ -4,7 +4,6 @@
 
 // do something
 import Message from '../util/message'
-import { ExtensionPageType } from '../util/notify'
 
 const messageP2C = new Message(ExtensionPageType.Content, ExtensionPageType.Popup, null)
 
