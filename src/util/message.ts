@@ -21,7 +21,10 @@ const FromPopupDict: PageDict[] = [
   {
     local: ExtensionPageType.Popup,
     remote: ExtensionPageType.Background,
-    send: () => {}
+    send: (vueInstance: ComponentInternalInstance | null, payload: any, callback: Function) => {
+      const backgroundPage = chrome.extension.getBackgroundPage()
+      callback(vueInstance, backgroundPage)
+    }
   }, {
     local: ExtensionPageType.Popup,
     remote: ExtensionPageType.Content,
@@ -82,14 +85,13 @@ class Message implements Notify{
 
     chrome.tabs.query(options, (tabs: any) => {
       if (this.sendFn === chrome.tabs.sendMessage) {
-        // this.sendFn === chrome.tabs.sendMessage
         this.sendFn(tabs[0].id, payload, callback)   // 这里似乎可以用函数重载进行简化
-      } else if (this.sendFn === chrome.tabs.sendMessage) {
-        // this.sendFn === chrome.runtime.sendMessage
+      } else if (this.sendFn === chrome.runtime.sendMessage) {
         this.sendFn(payload, callback)
-      } else {
-        // this.sendFn === window.postMessage
+      } else if (this.sendFn === window.postMessage) {
         this.sendFn(payload, this.from)
+      } else {  // 自定义方法
+        this.sendFn(this.context, payload, callback)
       }
     })
   }
