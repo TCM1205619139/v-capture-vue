@@ -2,7 +2,7 @@
   <div class="async-com-container">异步组件</div>
 </template>
 
-<script>
+<script lang="ts">
   import { defineComponent } from 'vue'
 
   export default defineComponent({

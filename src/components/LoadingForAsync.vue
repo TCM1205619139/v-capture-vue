@@ -2,7 +2,7 @@
   <div class="loading-async-container">Loading...</div>
 </template>
 
-<script>
+<script lang="ts">
   import { defineComponent } from 'vue'
 
   export default defineComponent({
