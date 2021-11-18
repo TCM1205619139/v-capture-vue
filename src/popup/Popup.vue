@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-  import Message from "../util/message";
+  import Message from '../util/message'
   import {defineComponent, ref, getCurrentInstance, ComponentInternalInstance} from 'vue'
 
   const createMessage = (vueInstance: ComponentInternalInstance | null): void => {
