@@ -60,38 +60,36 @@ const MessageDict = [
 /**
  * chrome插件各模块的短链接消息通知
  */
-class Message implements Notify{
+class ChromeMessage implements Notify{
   readonly from: ExtensionPageType
-  readonly to: ExtensionPageType
-  private readonly sendFn: Function
   public context: ComponentInternalInstance | null
 
-  constructor(from: ExtensionPageType, to: ExtensionPageType, context: ComponentInternalInstance | null) {
+  constructor(from: ExtensionPageType, context: ComponentInternalInstance | null) {
     this.from = from
-    this.to = to
     this.context = context
-    this.sendFn = this.findSendFn()
   }
 
-  private findSendFn () {
+  private findSendFn (to: ExtensionPageType) {
     const dict = MessageDict.find((item: PageDict) => {
-      return item.local === this.from && item.remote === this.to
+      return item.local === this.from && item.remote === to
     })
     return dict?.send || new Function()
   }
 
-  public send (payload: any, callback?: Function) {
+  public send (to: ExtensionPageType, payload: any, callback?: Function) {
     const options = {active: true, currentWindow: true}
 
+    const sendFn = this.findSendFn(to)
+
     chrome.tabs.query(options, (tabs: any) => {
-      if (this.sendFn === chrome.tabs.sendMessage) {
-        this.sendFn(tabs[0].id, payload, callback)   // 这里似乎可以用函数重载进行简化
-      } else if (this.sendFn === chrome.runtime.sendMessage) {
-        this.sendFn(payload, callback)
-      } else if (this.sendFn === window.postMessage) {
-        this.sendFn(payload, this.from)
+      if (sendFn === chrome.tabs.sendMessage) {
+        sendFn(tabs[0].id, payload, callback)   // 这里似乎可以用函数重载进行简化
+      } else if (sendFn === chrome.runtime.sendMessage) {
+        sendFn(payload, callback)
+      } else if (sendFn === window.postMessage) {
+        sendFn(payload, this.from)
       } else {  // 自定义方法
-        this.sendFn(this.context, payload, callback)
+        sendFn(this.context, payload, callback)
       }
     })
   }
@@ -112,4 +110,4 @@ class Message implements Notify{
   }
 }
 
-export default Message
+export default ChromeMessage

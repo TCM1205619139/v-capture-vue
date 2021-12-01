@@ -1,26 +1,14 @@
 <template>
-  <div class="popup-container">{{title}}</div>
+  <div class="popup-container">
+  </div>
 </template>
 
 <script lang="ts">
-  import Message from '../util/message'
-  import {defineComponent, ref, getCurrentInstance, ComponentInternalInstance} from 'vue'
-
-  const createMessage = (vueInstance: ComponentInternalInstance | null): void => {
-    const message = new Message(ExtensionPageType.Popup, ExtensionPageType.Content, vueInstance)
-
-    message.send({time: new Date()})
-  }
+  import { defineComponent, ref, getCurrentInstance, ComponentInternalInstance, SetupContext } from 'vue'
 
   export default defineComponent({
     name: 'App',
-    setup () {
-      const title = ref('你好')
-      createMessage(getCurrentInstance())
-
-      return {
-        title
-      }
+    setup (props: Object, ctx: SetupContext) {
     }
   })
 </script>

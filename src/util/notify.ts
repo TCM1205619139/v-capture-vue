@@ -1,6 +1,8 @@
+import { ComponentInternalInstance } from 'vue'
+
 interface Notify {
-  readonly from: ExtensionPageType,
-  readonly to: ExtensionPageType
+  readonly from: ExtensionPageType
+  readonly context: ComponentInternalInstance | null
 }
 
 export {
