@@ -4,6 +4,8 @@ const { VueLoaderPlugin } = require('vue-loader/dist/index')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const Components = require('unplugin-vue-components/webpack')
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 
 const join = dir => path.join(__dirname, '..', dir)
 
@@ -38,10 +40,10 @@ module.exports = {
   },
   mode: "development",
   resolve: {
+    extensions: ['.vue', '.ts', '.js'],
     alias: {
       '@': join('src')
-    },
-    extensions: ['.vue', '.ts', '.js'],
+    }
   },
   module: {
     rules: [
@@ -111,6 +113,9 @@ module.exports = {
     ]
   },
   plugins: [
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
     createHtmlTemplate('background', 'background'),
     createHtmlTemplate('content', 'content'),
     createHtmlTemplate('devtool', 'devtool'),
