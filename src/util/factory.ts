@@ -6,9 +6,9 @@ type VueComponent = DefineComponent<{}, {}, any>
 
 /**
  * 创建异步组件函数
- * @param component
- * @param loading
- * @param error
+ * @param importComponentFn
+ * @param loadingComponent
+ * @param errorComponent
  * @param delay
  * @param timeout
  */
