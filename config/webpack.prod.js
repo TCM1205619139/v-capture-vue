@@ -4,7 +4,6 @@ const webpack = require('webpack')
 
 module.exports = merge(webpackBaseConfig, {
   mode: "production",
-  devtool: 'none',
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"development"'
