@@ -45,6 +45,9 @@
     "activeTab",
     "scripting"
   ],
+  "host_permissions": [
+    "*://*/*"
+  ],
   "sandbox": {
     "pages": [
       "/html/devtool.html",
