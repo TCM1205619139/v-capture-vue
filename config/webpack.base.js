@@ -38,6 +38,7 @@ module.exports = {
     library: '[name]',
     chunkFilename: 'js/[id].[name].js'
   },
+  devtool: 'cheap-module-source-map',
   mode: "development",
   resolve: {
     extensions: ['.vue', '.ts', '.js', '.d.ts'],
@@ -117,8 +118,8 @@ module.exports = {
       resolvers: [ElementPlusResolver()],
       dts: true
     }),
-    createHtmlTemplate('background', 'background'),
-    createHtmlTemplate('content', 'content'),
+    // createHtmlTemplate('background', 'background'),
+    // createHtmlTemplate('content', 'content'),
     createHtmlTemplate('devtool', 'devtool'),
     createHtmlTemplate('option', 'option'),
     createHtmlTemplate('popup', 'popup'),

@@ -6,7 +6,8 @@
   import { defineComponent } from 'vue'
 
   export default defineComponent({
-    name: "Option"
+    name: "Option",
+    setup () {}
   })
 </script>
 
