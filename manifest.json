@@ -43,8 +43,7 @@
   "permissions": [
     "storage",
     "activeTab",
-    "scripting",
-    "declarativeContent"
+    "scripting"
   ],
   "sandbox": {
     "pages": [
