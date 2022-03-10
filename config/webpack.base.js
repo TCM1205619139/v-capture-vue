@@ -4,8 +4,8 @@ const { VueLoaderPlugin } = require('vue-loader/dist/index')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const Component = require('unplugin-vue-components/dist/webpack')
-const { ElementPlusResolver } = require('unplugin-vue-components/dist/resolvers')
+const Component = require('unplugin-vue-components/dist/webpack.js')
+const { ElementPlusResolver } = require('unplugin-vue-components/dist/resolvers.js')
 
 const join = dir => path.join(__dirname, '..', dir)
 
