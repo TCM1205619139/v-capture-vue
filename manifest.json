@@ -47,15 +47,5 @@
   ],
   "host_permissions": [
     "*://*/*"
-  ],
-  "sandbox": {
-    "pages": [
-      "/html/devtool.html",
-      "/html/option.html",
-      "/html/popup.html",
-      "/html/tab.html",
-      "/js/background.js",
-      "/js/content.js"
-    ]
-  }
+  ]
 }

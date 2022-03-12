@@ -38,8 +38,6 @@ module.exports = {
     library: '[name]',
     chunkFilename: 'js/[id].[name].js'
   },
-  devtool: 'cheap-module-source-map',
-  mode: "development",
   resolve: {
     extensions: ['.vue', '.ts', '.js', '.d.ts'],
     alias: {
