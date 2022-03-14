@@ -87,10 +87,6 @@ module.exports = {
         options: {
           appendTsSuffixTo: [/\.vue$/]
         }
-        // use: [
-        //   'babel-loader',
-        //   'ts-loader'
-        // ]
       },
       {
         test: /\.(le|c)ss$/,
