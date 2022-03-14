@@ -4,11 +4,11 @@ module.exports = {
       '@babel/preset-env',
       {
         useBuiltIns: 'usage',
-        corejs: 3,
+        corejs: 3
       },
     ],
     [
-      '@babel/preset-typescript', // 引用Typescript插件
+      '@babel/preset-typescript',
       {
         allExtensions: true, // 支持所有文件扩展名，否则在vue文件中使用ts会报错
       },
