@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "vue3.x版本的 v-capture",
   "background": {
-    "service_worker": "/js/background.js"
+    "service_worker": "background.js"
   },
   "action": {
     "default_popup": "/html/popup.html",

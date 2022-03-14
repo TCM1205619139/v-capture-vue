@@ -1,11 +1,11 @@
 const path = require('path')
-const { DefinePlugin } = require('webpack')
-const { VueLoaderPlugin } = require('vue-loader/dist/index')
+const {DefinePlugin} = require('webpack')
+const {VueLoaderPlugin} = require('vue-loader/dist/index')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const Component = require('unplugin-vue-components/dist/webpack.js')
-const { ElementPlusResolver } = require('unplugin-vue-components/dist/resolvers.js')
+const {ElementPlusResolver} = require('unplugin-vue-components/dist/resolvers.js')
 
 const join = dir => path.join(__dirname, '..', dir)
 
@@ -34,7 +34,7 @@ module.exports = {
   output: {
     path: join('build'),
     publicPath: '../',
-    filename: 'js/[name].js',
+    filename: (path) => path.chunk.name === 'background' ? 'background.js' : 'js/[name].js',
     library: '[name]',
     chunkFilename: 'js/[id].[name].js'
   },
@@ -126,8 +126,8 @@ module.exports = {
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
       patterns: [
-        { from: join('manifest.json'), to: join('build') },
-        { from: join('static'), to: join('build') }
+        {from: join('manifest.json'), to: join('build')},
+        {from: join('static'), to: join('build')}
       ]
     }),
     new DefinePlugin({
