@@ -1,5 +1,6 @@
 import jsonPlugin from 'rollup-plugin-json'
-import vuePlugin from 'rollup-plugin-vue'
+// import vuePlugin from 'rollup-plugin-vue'
+import vuePlugin from '@vitejs/plugin-vue'
 import babelPlugin from '@rollup/plugin-babel'
 import replacePlugin from 'rollup-plugin-replace'
 import postcssPlugin from 'rollup-plugin-postcss'
@@ -7,7 +8,9 @@ import resolvePlugin from 'rollup-plugin-node-resolve'
 import commonjsPlugin from 'rollup-plugin-commonjs'
 import typescriptPlugin from "rollup-plugin-ts"
 import copyPlugin from 'rollup-plugin-copy'
-import HtmlPlugin from '@rollup/plugin-html'
+import htmlPlugin from '@rollup/plugin-html'
+import createTemplate from "../template.ts";
+// import htmlTemplatePlugin from 'rollup-plugin-generate-html-template'
 
 const path = require('path')
 const join = (dirs) => {
@@ -66,16 +69,14 @@ const multiModule = inputFileList.map(inputFile => {
   if (createHtmlTemplateList.includes(inputFile)) {
     console.log('需要打包成html', inputFile)
     module.plugins.push(
-      HtmlPlugin(
+      htmlPlugin(
         {
           fileName: `${inputFile}.html`,
-          publicPath: join([OUTPUT_PATH, 'html']),
-          // template: ({attributes, bundle, files, publicPath, title}) => {
-          //   // console.log({attributes, bundle, files, publicPath, title})
-          //   return `<div></div>`
-          // }
+          publicPath: '../js/',
+          template:({ attributes, bundle, files, publicPath, title })=>createTemplate({ attributes, bundle, files, publicPath, title }, inputFile)
         }
-      ))
+      )
+    )
   }
 
   return module
@@ -85,11 +86,3 @@ const multiModule = inputFileList.map(inputFile => {
 
 
 export default multiModule
-// export default {
-//   input: 'src/main.js',
-//   output: {
-//     file: 'build/bundle.js',
-//     format: 'cjs'
-//   },
-//   plugins: [json()]
-// };
