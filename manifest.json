@@ -4,23 +4,23 @@
   "version": "1.0.0",
   "description": "vue3.x版本的 v-capture",
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "/background.js"
   },
   "action": {
-    "default_popup": "/html/popup.html",
+    "default_popup": "/js/popup.html",
     "default_icon": {
-      "16": "/images/png/get_started16.png",
-      "32": "/images/png/get_started32.png",
-      "48": "/images/png/get_started48.png",
-      "128": "/images/png/get_started128.png"
+      "16": "/static/images/png/get_started16.png",
+      "32": "/static/images/png/get_started32.png",
+      "48": "/static/images/png/get_started48.png",
+      "128": "/static/images/png/get_started128.png"
     }
   },
-  "options_page": "html/option.html",
+  "options_page": "/js/option.html",
   "icons": {
-    "16": "/images/png/get_started16.png",
-    "32": "/images/png/get_started32.png",
-    "48": "/images/png/get_started48.png",
-    "128": "/images/png/get_started128.png"
+    "16": "/static/images/png/get_started16.png",
+    "32": "/static/images/png/get_started32.png",
+    "48": "/static/images/png/get_started48.png",
+    "128": "/static/images/png/get_started128.png"
   },
   "content_security_policy": {
     "script-src": "none",

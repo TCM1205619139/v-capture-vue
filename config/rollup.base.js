@@ -18,6 +18,14 @@ const join = (dirs) => {
   return path.join(__dirname, '..', ...dirs)
 }
 
+const exceptFile = (targetArray, inputFile) => {
+  if (targetArray.includes(inputFile)) {
+    return join([OUTPUT_PATH, inputFile + '.js'])
+  } else {
+    return join([OUTPUT_PATH, 'js', inputFile + '.js'])
+  }
+}
+
 const inputFileList = ['background', 'content', 'devtool', 'option', 'popup', 'tab']
 const createHtmlTemplateList = ['devtool', 'option', 'popup', 'tab']
 const INPUT_PATH = 'src'
@@ -27,8 +35,8 @@ const multiModule = inputFileList.map(inputFile => {
     input: join([INPUT_PATH, inputFile, 'index.ts']),
     output: [{
       // dir: OUTPUT_PATH,
-      file: join([OUTPUT_PATH, 'js', inputFile + '.js']),
-      format: 'es',
+      file: exceptFile(['background'], inputFile),
+      format: 'cjs',
       name: inputFile
     }],
     plugins: [
@@ -50,7 +58,7 @@ const multiModule = inputFileList.map(inputFile => {
       }),
       postcssPlugin({
         extensions: ['.css', 'less'],
-        extract: 'index.css'
+        extract: `${inputFile}.css`,
       }),
       commonjsPlugin(),
       copyPlugin({
@@ -73,7 +81,13 @@ const multiModule = inputFileList.map(inputFile => {
         {
           fileName: `${inputFile}.html`,
           publicPath: '../js/',
-          template:({ attributes, bundle, files, publicPath, title })=>createTemplate({ attributes, bundle, files, publicPath, title }, inputFile)
+          template: ({attributes, bundle, files, publicPath, title}) => createTemplate({
+            attributes,
+            bundle,
+            files,
+            publicPath,
+            title
+          }, inputFile)
         }
       )
     )
