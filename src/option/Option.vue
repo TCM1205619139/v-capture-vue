@@ -1,13 +1,22 @@
 <template>
-  <div class="popup-container"></div>
+  <div class="popup-container">
+    <el-input v-model="input" placeholder="Please input" />
+<!--    <el-button>I am ElButton</el-button>-->
+  </div>
 </template>
 
 <script>
-  import { defineComponent } from 'vue'
+  import { defineComponent, ref } from 'vue'
 
   export default defineComponent({
-    name: "Option",
-    setup () {}
+    name: 'Option',
+    setup () {
+      const input = ref('')
+
+      return {
+        input
+      }
+    }
   })
 </script>
 

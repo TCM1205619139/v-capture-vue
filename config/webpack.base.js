@@ -4,6 +4,7 @@ const { VueLoaderPlugin } = require('vue-loader/dist/index')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const { ElementPlusResolver } = require('unplugin-vue-components/dist/resolvers.js')
 const Component = require('unplugin-vue-components/dist/webpack.js')
 const { ElementPlusResolver } = require('unplugin-vue-components/dist/resolvers.js')
 
