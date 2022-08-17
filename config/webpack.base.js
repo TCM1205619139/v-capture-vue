@@ -6,7 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { ElementPlusResolver } = require('unplugin-vue-components/dist/resolvers.js')
 const Component = require('unplugin-vue-components/dist/webpack.js')
-const { ElementPlusResolver } = require('unplugin-vue-components/dist/resolvers.js')
+const ProgressPlugin = require('progress-webpack-plugin')
 
 const join = dir => path.join(__dirname, '..', dir)
 const getType = target => Object.getPrototypeOf(target).constructor.name
@@ -90,11 +90,26 @@ module.exports = {
         }
       },
       {
-        test: /\.(le|c)ss$/,
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.less$/,
         use: [
           'style-loader',
           'css-loader',
           'less-loader'
+        ]
+      },
+      {
+        test: /\.s([ac])ss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
         ]
       },
       {
@@ -136,6 +151,7 @@ module.exports = {
     createHtmlTemplate('tab', 'tab'),
     new VueLoaderPlugin(),
     new CleanWebpackPlugin(),
+    new ProgressPlugin(true),
     new CopyWebpackPlugin({
       patterns: [
         { from: join('manifest.json'), to: join('build') },
